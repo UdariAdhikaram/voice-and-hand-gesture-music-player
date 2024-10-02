@@ -21,6 +21,7 @@ eyed3.log.setLevel("ERROR")
 
 playlists = []
 
+
 # Initialize Pygame and Tkinter
 pygame.mixer.init()
 root = tk.Tk()

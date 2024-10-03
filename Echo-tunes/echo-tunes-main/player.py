@@ -230,31 +230,6 @@ def play_by_index(index):
     current_song = song
     songs = os.listdir(selected_playlist)
 
-'''def play_music(index):
-    global current_song, current_singer, current_status, start_time, song_length, current_song_index
-    if index < 0 or index >= len(songs):
-        print("Invalid song index")
-        return
-
-    file = songs[index]
-    pygame.mixer.music.load(file)
-    pygame.mixer.music.play()
-    pygame.mixer.music.set_volume(current_volume)  # Set initial volume
-    start_time = time.time()
-    song_length = pygame.mixer.Sound(file).get_length()
-
-    # Extract song and singer from filename
-    file_name = os.path.basename(file).replace('.mp3', '')
-    if '-' in file_name:
-        current_song, current_singer = file_name.split('-', 1)
-    else:
-        current_song = file_name
-        current_singer = "Unknown"
-
-    current_status = "Playing"
-    current_song_index = index
-    print("Playing music...")
-'''
 
 def next_song():
     global current_song
@@ -304,7 +279,7 @@ def resume_song():
 
 
 # Define volume control function
-
+'''
 # Function to update the volume level
 current_volume = 40  # Starting volume at 40%
 
@@ -317,7 +292,21 @@ def set_volume(change):
     elif current_volume < 0:
         current_volume = 0  # Limit volume to 0%
     pygame.mixer.music.set_volume(current_volume / 100)  # Apply volume change to mixer
-    print(f"Volume set to: {current_volume}%")  # Replace with actual volume control logic
+    print(f"Volume set to: {current_volume}%")  # Replace with actual volume control logic '''
+
+# Function to update the volume level
+current_volume = 40  # Starting volume at 40%
+
+def set_volume(change):
+    global current_volume
+    change = int(change)  # Convert change to integer
+    current_volume += change
+    if current_volume > 100:
+        current_volume = 100  # Limit volume to 100%
+    elif current_volume < 0:
+        current_volume = 0  # Limit volume to 0%
+    pygame.mixer.music.set_volume(current_volume / 100)  # Apply volume change to mixer
+    print(f"Volume set to: {current_volume}%")  # Print volume level for debugging
 
 
 # previous button
@@ -380,25 +369,12 @@ volume_up_button.pack(side=tk.RIGHT, padx=5, pady=5)
 # Volume down button
 img = Image.open('icons/volume-down.png')
 img = img.resize((50, 50), Image.LANCZOS)
+
 volume_down_icon = ImageTk.PhotoImage(img)
 volume_down_button = tk.Button(control_frame, image=volume_down_icon, command=lambda: set_volume(-10), bg='#ffffff',
                                compound=tk.CENTER)
 volume_down_button.pack(side=tk.RIGHT, padx=5, pady=5)
 
-
-# Function to update the volume level
-current_volume = 40  # Starting volume at 40%
-
-def set_volume(change):
-    global current_volume
-    change = int(change)  # Convert change to integer
-    current_volume += change
-    if current_volume > 100:
-        current_volume = 100  # Limit volume to 100%
-    elif current_volume < 0:
-        current_volume = 0  # Limit volume to 0%
-    pygame.mixer.music.set_volume(current_volume / 100)  # Apply volume change to mixer
-    print(f"Volume set to: {current_volume}%")  # Replace with actual volume control logic
 
 def on_exit():
     # Save playlists when the application is closed

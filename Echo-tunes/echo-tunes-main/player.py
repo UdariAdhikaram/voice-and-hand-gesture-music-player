@@ -32,7 +32,7 @@ root.geometry('920x600')
 root.configure(bg='#7B2869')
 
 # Create title label
-title_label = tk.Label(root, text="Echo Tunes", bg='#7B2869', font=("Helvetica", 20, "bold"))
+title_label = tk.Label(root, text="Echo Tunes", bg='#7B2869', fg='#D7B8F3', font=("Helvetica", 20, "bold"))
 title_label.place(x=100, y=10, width=720, height=50)
 
 # Create frames for playlist and controls
@@ -364,7 +364,7 @@ img = img.resize((50, 50), Image.LANCZOS)
 volume_up_icon = ImageTk.PhotoImage(img)
 volume_up_button = tk.Button(control_frame, image=volume_up_icon, command=lambda: set_volume(10), bg='#ffffff',
                              compound=tk.CENTER)
-volume_up_button.pack(side=tk.RIGHT, padx=5, pady=5)
+volume_up_button.pack(side=tk.LEFT, padx=5, pady=5)
 
 # Volume down button
 img = Image.open('icons/volume-down.png')
@@ -373,7 +373,35 @@ img = img.resize((50, 50), Image.LANCZOS)
 volume_down_icon = ImageTk.PhotoImage(img)
 volume_down_button = tk.Button(control_frame, image=volume_down_icon, command=lambda: set_volume(-10), bg='#ffffff',
                                compound=tk.CENTER)
-volume_down_button.pack(side=tk.RIGHT, padx=5, pady=5)
+volume_down_button.pack(side=tk.LEFT, padx=5, pady=5)
+
+
+def show_favorite_songs():
+    show_favorites()
+
+# favourite button
+img = Image.open('icons/favorite.png')
+img = img.resize((50, 50), Image.LANCZOS)
+favourite_icon = ImageTk.PhotoImage(img)
+favourite_button = tk.Button(control_frame, image=favourite_icon, command=show_favorite_songs, bg='#ffffff',
+                             compound=tk.CENTER)
+favourite_button.pack(side=tk.LEFT)
+favourite_button.pack(side=tk.LEFT, padx=5, pady=5)
+
+
+img = Image.open('icons/man.png')
+img = img.resize((50, 50), Image.LANCZOS)
+man_icon = ImageTk.PhotoImage(img)
+man_button = tk.Button(control_frame, image=man_icon, command=next_song, bg='#ffffff', compound=tk.CENTER)
+man_button.pack(side=tk.RIGHT)
+man_button.pack(side=tk.RIGHT, padx=5, pady=5)
+
+img = Image.open('icons/hand.png')
+img = img.resize((50, 50), Image.LANCZOS)
+hand_icon = ImageTk.PhotoImage(img)
+hand_button = tk.Button(control_frame, image=hand_icon, command=next_song, bg='#ffffff', compound=tk.CENTER)
+hand_button.pack(side=tk.RIGHT)
+hand_button.pack(side=tk.RIGHT, padx=5, pady=5)
 
 
 def on_exit():
@@ -442,13 +470,13 @@ def handle_voice_command(recognizer, microphone):
                 elif command in pause_commands:
                     pause_song()
                 elif command in volume_up_commands:
-                    current_volume = volume_scale.get()
+                    current_volume = volume_scale.get() #should change
                     new_volume = current_volume + 10 if current_volume + 10 < 100 else 100
-                    volume_scale.set(new_volume)
+                    volume_scale.set(new_volume) #should change
                 elif command in volume_down_commands:
-                    current_volume = volume_scale.get()
+                    current_volume = volume_scale.get() #should change
                     new_volume = current_volume - 10 if current_volume - 10 > 0 else 0
-                    volume_scale.set(new_volume)
+                    volume_scale.set(new_volume) #should change
                 elif any(cmd in command for cmd in search_playlist_commands):
                     playlist_name = command.split(" ", 2)[2]
                     playlist_index = search_playlist(playlist_name)
@@ -510,23 +538,11 @@ def toggle_favorite():
         print(f"Added {selected_song} to favorites")
 
 
-def show_favorite_songs():
-    show_favorites()
-
-
-# favourite button
-img = Image.open('icons/favorite.png')
-img = img.resize((50, 50), Image.LANCZOS)
-favourite_icon = ImageTk.PhotoImage(img)
-favourite_button = tk.Button(control_frame, image=favourite_icon, command=show_favorite_songs, bg='#ffffff',
-                             compound=tk.CENTER)
-favourite_button.pack(side=tk.LEFT)
-favourite_button.pack(side=tk.LEFT, padx=5, pady=5)
 
 # Define volume_scale
-volume_scale = tk.Scale(control_frame, from_=0, to=100, orient=tk.HORIZONTAL, label="Volume", command=set_volume, bg='#ffffff')
-volume_scale.set(40)  # Set default volume to 40%
-volume_scale.pack(side=tk.RIGHT)
+#volume_scale = tk.Scale(control_frame, from_=0, to=100, orient=tk.HORIZONTAL, label="Volume", command=set_volume, bg='#ffffff')
+#volume_scale.set(40)  # Set default volume to 40%
+#volume_scale.pack(side=tk.RIGHT)
 
 # Initialize speech recognizer and microphone
 recognizer = sr.Recognizer()

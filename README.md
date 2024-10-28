@@ -4,6 +4,7 @@ Hands-free control through computer vision and machine learning
 voice-control includes Speech Recognition, PyGame Mixer and Threading.
 
 Tools and techniques:
+
 Python: Core programming language for data collection, model training, and inference.
 OpenCV: Facilitates image and video processing, capturing webcam frames, real-time inference, and rendering bounding boxes.
 MediaPipe: A Google library providing a pre-trained hand-tracking model for hand landmarks, enhancing gesture detection accuracy.

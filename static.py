@@ -1,0 +1,8 @@
+play_commands = ["play", "start", "play song", "start song"]
+pause_commands = ["pause", "pause song"]
+next_song_commands = ["next", "next song"]
+previous_song_commands = ["previous", "previous song"]
+stop_commands = ["stop", "stop song"]
+volume_up_commands = ["volume up", "louder", "increase volume"]
+volume_down_commands = ["volume down", "quieter", "decrease volume"]
+search_playlist_commands = ["search", "find playlist", "select playlist"]

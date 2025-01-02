@@ -509,7 +509,6 @@ def handle_voice_command(recognizer, microphone):
 favorites = []
 def add_song(filename, i, is_favorite=False):
     # Existing code to add song to the playlist
-    ...
     if is_favorite:
         favorites.append(filename)
 
